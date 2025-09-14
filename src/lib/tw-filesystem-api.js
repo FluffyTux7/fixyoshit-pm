@@ -10,11 +10,11 @@ const showSaveFilePicker = fileName => window.showSaveFilePicker({
             {
                 description: 'PenguinMod Project',
                 accept: {
-                    'application/x.scratch.sb3': ['.pmp', '.pm', '.sb3', '.sb2', '.sb']
+                    'application/x.scratch.sb3': '.pmp'
                 }
             }
         ],
-        excludeAcceptAllOption: false
+        excludeAcceptAllOption: true
     }),
 });
 
@@ -22,30 +22,12 @@ const showOpenFilePicker = async () => {
     const [handle] = await window.showOpenFilePicker({
         multiple: false,
         ...(isMobile() ? {} : {
-            types: [
-                {
-                    description: 'Supported Files',
-                    accept: {
-                        'application/x.scratch.sb3': ['.pmp', '.pm', '.sb3', '.sb2', '.sb']
-                    }
-                },
-                {
-                    description: 'PenguinMod Project',
-                    accept: {
-                        'application/x.scratch.sb3': ['.pmp', '.pm']
-                    }
-                },
-                {
-                    description: 'Scratch Project',
-                    accept: {
-                        'application/x.scratch.sb3': ['.sb3', '.sb2', '.sb']
-                    }
-                }
-            ]
+            // Remove the "types" field entirely to allow all file types
         }),
     });
     return handle;
 };
+
 
 const showDirectoryPicker = async (optId, optStartIn) => {
     const handle = await window.showDirectoryPicker({
